@@ -6,8 +6,12 @@
 </head>
 
 <body>
-	<script type="text/javascript" src="js/lib/jquery-1.11.2.min.js"></script>
-	<script type="text/javascript" src="js/lib/markdown.js"></script>
+	<script type="text/javascript" src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://cdn.bootcss.com/markdown.js/0.5.0/markdown.min.js"></script>
+	<script>
+		window.jQuery || document.write('<script src="js/lib/jquery-1.11.2.min.js"><\/script>')
+		window.markdown || document.write('<script src="js/lib/markdown.js"><\/script>')
+	</script>
 	<script type="text/javascript" src="js/main.js"></script>
 	<script>
 		$.ajax({
