@@ -28,7 +28,7 @@
 			$(".container").append("<p>最新文章<p>");
 			for ( var i in data) {
 				var realData = parseData(data[i].name);
-				$(".container").append("<a>" + realData.title + "<span>" + realData.time + "</span></a>");
+				$(".container").append("<p>" + realData.title + "<span>" + realData.time + "</span></p>");
 			}
 		}
 	});
