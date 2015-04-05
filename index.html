@@ -25,10 +25,12 @@
 	$.ajax({
 		url : "https://api.github.com/repos/cmanlh/cmanlh.github.io/contents/post/html",
 		success : function(data) {
-			$(".container").append("<p>最新文章<p>");
-			for ( var i in data) {
+			var cnt = data.length;
+			for (var i = cnt - 1; i >= 0; i--) {
 				var realData = parseData(data[i].name);
-				$(".container").append("<p>" + realData.title + "<span>" + realData.time + "</span></p>");
+				$(".container").append(
+						"<blockquote><h4 style='color: #555;'>" + realData.title + "<span class='pull-right'>"
+								+ realData.time + "</span></h4></blockquote>");
 			}
 		}
 	});
