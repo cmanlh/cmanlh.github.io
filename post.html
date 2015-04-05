@@ -14,18 +14,21 @@
 	</div>
 	<div id="epiceditor"></div>
 </body>
+<script type="text/javascript" src="http://7xifrq.com1.z0.glb.clouddn.com/common/tools.js"></script>
 <script type="text/javascript" src="http://7xifrq.com1.z0.glb.clouddn.com/jquery.min.js"></script>
 <script type="text/javascript" src="http://7xifrq.com1.z0.glb.clouddn.com/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="http://7xifrq.com1.z0.glb.clouddn.com/EpicEditor/js/epiceditor.min.js"></script>
 <script type="text/javascript">
-	alert(navigator.platform);
-	alert(navigator.userAgent);
+	var editorHeight = window.screen.availHeight / 2;
+	if (isMobile.any()) {
+		editorHeight = window.screen.availHeight / 7 * 3;
+	}
 	var opts = {
 		basePath : 'http://7xifrq.com1.z0.glb.clouddn.com/EpicEditor',
 		button : false,
 		autogrow : {
-			minHeight : window.screen.availHeight / 2,
-			maxHeight : window.screen.availHeight / 2
+			minHeight : editorHeight,
+			maxHeight : editorHeight
 		}
 	}
 	var editor = new EpicEditor(opts).load();
