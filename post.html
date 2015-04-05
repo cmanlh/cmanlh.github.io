@@ -47,12 +47,7 @@
 	$("#submit").on(
 			"click",
 			function(e) {
-				var github = new Github({
-					username : "cmanlh@163.com",
-					password : "passw0rd@github",
-					auth : "basic"
-				});
-				var repo = github.getRepo("cmanlh", "cmanlh.github.io");
+
 				repo.write('master', 'post/md/' + Date.now() + "-" + $("#title").val() + ".md", editor.exportFile(null,
 						"text", false), 'post a new blog', function(err) {
 					repo.write('master', 'post/html/' + Date.now() + "-" + $("#title").val() + ".html", editor
