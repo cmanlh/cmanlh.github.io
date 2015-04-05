@@ -14,8 +14,9 @@
 <script type="text/javascript" src="http://7xifrq.com1.z0.glb.clouddn.com/github.js"></script>
 <script type="text/javascript" src="http://7xifrq.com1.z0.glb.clouddn.com/EpicEditor/js/epiceditor.min.js"></script>
 <script type="text/javascript">
-	var editor = new EpicEditor();
-	editor.settings.basePath = "http://7xifrq.com1.z0.glb.clouddn.com/EpicEditor";
-	editor.load();
+	var opts = {
+		basePath : 'http://7xifrq.com1.z0.glb.clouddn.com/EpicEditor'
+	}
+	var editor = new EpicEditor(opts).load();
 </script>
 </html>
