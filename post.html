@@ -8,9 +8,18 @@
 <title>写文章</title>
 </head>
 <body>
-	<div class="pull-right">
-		<input class="btn btn-default" type="button" value="清除"><input class="btn btn-default" type="button" value="预览"><input
-			class="btn btn-default" type="button" value="发表">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-1 col-md-1">
+				<input class="btn btn-default" type="button" value="清除" id="reset">
+			</div>
+			<div class="col-xs-1 col-md-1">
+				<input class="btn btn-default" type="button" value="预览" id="preview">
+			</div>
+			<div class="col-xs-1 col-md-1	">
+				<input class="btn btn-default" type="button" value="发表" id="submit">
+			</div>
+		</div>
 	</div>
 	<div id="epiceditor"></div>
 </body>
@@ -35,4 +44,16 @@
 </script>
 <script type="text/javascript" src="http://7xifrq.com1.z0.glb.clouddn.com/underscore-min.js"></script>
 <script type="text/javascript" src="http://7xifrq.com1.z0.glb.clouddn.com/github.js"></script>
+<script type="text/javascript">
+	$("#submit").on("click", function(e) {
+		var github = new Github({
+			username : "cmanlh@163.com",
+			password : "passw0rd@github",
+			auth : "basic"
+		});
+		var repo = github.getRepo("cmanlh", "cmanlh.github.com");
+		repo.write('master', 'post/md/' + Date.now() + "-", 'YOUR_NEW_CONTENTS', 'YOUR_COMMIT_MESSAGE', function(err) {
+		});
+	});
+</script>
 </html>
