@@ -55,15 +55,13 @@
 	var editor = new EpicEditor(opts).load();
 </script>
 <script type="text/javascript" src="http://7xifrq.com1.z0.glb.clouddn.com/underscore-min.js"></script>
-<script type="text/javascript" src="js/lib/base64.js"></script>
+<script type="text/javascript" src="http://7xifrq.com1.z0.glb.clouddn.com/base64.js"></script>
 <script type="text/javascript" src="http://7xifrq.com1.z0.glb.clouddn.com/github.js"></script>
 <script type="text/javascript">
 	window.btoa = function(data) {
-		console.log(data);
 		return base64.encode(wtf8.encode(data));
 	};
 	window.atob = function(data) {
-		console.log(data);
 		return wtf8.decode(base64.decode(data));
 	}
 	function post(user, pwd) {
@@ -77,7 +75,6 @@
 				false), 'post a new blog', function(err) {
 			repo.write('master', 'post/html/' + Date.now() + "-" + $("#title").val() + ".html", editor.exportFile(null,
 					"html", false), 'post a new blog', function(err, data) {
-				console.log(data);
 			});
 		});
 	}
@@ -99,6 +96,7 @@
 			user : btoa($("#user").val()),
 			pwd : btoa($("#pwd").val())
 		});
+		$(".login").hide();
 	});
 </script>
 </html>
