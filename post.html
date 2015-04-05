@@ -20,7 +20,11 @@
 <script type="text/javascript">
 	var opts = {
 		basePath : 'http://7xifrq.com1.z0.glb.clouddn.com/EpicEditor',
-		button : false
+		button : false,
+		autogrow : {
+			minHeight : window.screen.height / 2,
+			maxHeight : window.screen.height / 2
+		}
 	}
 	var editor = new EpicEditor(opts).load();
 </script>
