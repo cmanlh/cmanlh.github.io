@@ -3,21 +3,32 @@
 <head>
 <meta charset='UTF-8'>
 <title>CManLH's Blog</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link href="http://7xifrq.com1.z0.glb.clouddn.com/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+	<div class="container"></div>
 </body>
 <script type="text/javascript" src="http://7xifrq.com1.z0.glb.clouddn.com/jquery.min.js"></script>
-<script>
-	window.jQuery || document.write('<script src="js/lib/jquery.min.js"><\/script>')
-	window.markdown || document.write('<script src="js/lib/markdown.js"><\/script>')
-</script>
+<script type="text/javascript" src="http://7xifrq.com1.z0.glb.clouddn.com/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
 <script>
+	function parseData(data) {
+		var splittedData = data.split("-");
+		return {
+			time : new Date(Number.parseInt(splittedData[0])).toLocaleString(),
+			title : splittedData[1]
+		};
+	}
 	$.ajax({
 		url : "https://api.github.com/repos/cmanlh/cmanlh.github.io/contents/post/html",
 		success : function(data) {
+			$(".container").append("<p>最新文章<p>");
 			for ( var i in data) {
-				$("body").append(data[i].name);
+				var realData = parseData(data[i]);
+				$(".container").append("<a>" + realData.title + "<span>" + realData.time + "</span></a>");
 			}
 		}
 	});
