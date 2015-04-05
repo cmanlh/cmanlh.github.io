@@ -4,22 +4,20 @@
 <meta charset='UTF-8'>
 <title>CManLH's Blog</title>
 </head>
-
 <body>
-	<script type="text/javascript" src="http://7xifrq.com1.z0.glb.clouddn.com/jquery.min.js"></script>
-	<script type="text/javascript" src="http://7xifrq.com1.z0.glb.clouddn.com/markdown.js"></script>
-	<script>
-		window.jQuery || document.write('<script src="js/lib/jquery.min.js"><\/script>')
-		window.markdown || document.write('<script src="js/lib/markdown.js"><\/script>')
-	</script>
-	<script type="text/javascript" src="js/main.js"></script>
-	<script>
-		$.ajax({
-			url : "README.md",
-			success : function(data) {
-				$("body").append(markdown.toHTML(data));
-			}
-		});
-	</script>
 </body>
+<script type="text/javascript" src="http://7xifrq.com1.z0.glb.clouddn.com/jquery.min.js"></script>
+<script>
+	window.jQuery || document.write('<script src="js/lib/jquery.min.js"><\/script>')
+	window.markdown || document.write('<script src="js/lib/markdown.js"><\/script>')
+</script>
+<script type="text/javascript" src="js/main.js"></script>
+<script>
+	$.ajax({
+		url : "https://api.github.com/repos/cmanlh/cmanlh.github.io/contents/post/html",
+		success : function(data) {
+			console.log(data);
+		}
+	});
+</script>
 </html>
