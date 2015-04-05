@@ -73,8 +73,8 @@
 		var repo = github.getRepo("cmanlh", "cmanlh.github.io");
 		repo.write('master', 'post/md/' + Date.now() + "-" + $("#title").val() + ".md", editor.exportFile(null, "text",
 				false), 'post a new blog', function(err) {
-			repo.write('master', 'post/html/' + Date.now() + "-" + $("#title").val() + ".html", editor.exportFile(null,
-					"html", false), 'post a new blog', function(err, data) {
+			repo.write('master', 'post/html/' + Date.now() + "-" + $("#title").val(), editor.exportFile(null, "html",
+					false), 'post a new blog', function(err, data) {
 			});
 		});
 	}
@@ -89,6 +89,10 @@
 			return;
 		}
 
+	});
+
+	$("#reset").on("click", function(e) {
+		editor.editor.textContent = "";
 	});
 
 	$("#login").on("click", function(e) {
