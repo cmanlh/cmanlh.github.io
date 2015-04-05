@@ -19,9 +19,18 @@
 		</div>
 	</div>
 	<div id="epiceditor"></div>
-	<div class="container-fluid">
-		<input class="form-control" type="text" id="user"> <input class="form-control" type="password" id="pwd"> <input
-			class="form-control" type="text" id="user"><input class="btn btn-default" type="button" value="登录" id="login">
+	<div class="container-fluid login" style="display: none;">
+		<div class="row">
+			<div class="col-xs-4 col-md-4">
+				<input class="form-control" type="text" id="user">
+			</div>
+			<div class="col-xs-4 col-md-4">
+				<input class="form-control" type="password" id="pwd">
+			</div>
+			<div class="col-xs-4 col-md-4">
+				<input class="btn btn-default" type="button" value="登录" id="login">
+			</div>
+		</div>
 	</div>
 </body>
 <script type="text/javascript" src="http://7xifrq.com1.z0.glb.clouddn.com/common/tools.js"></script>
@@ -46,29 +55,50 @@
 	var editor = new EpicEditor(opts).load();
 </script>
 <script type="text/javascript" src="http://7xifrq.com1.z0.glb.clouddn.com/underscore-min.js"></script>
+<script type="text/javascript" src="js/lib/base64.js"></script>
 <script type="text/javascript" src="http://7xifrq.com1.z0.glb.clouddn.com/github.js"></script>
 <script type="text/javascript">
-	$("#submit").on(
-			"click",
-			function(e) {
-				var github = null;
-				if (localStorage.githubAct) {
-					github = new Github({
-						username : localStorage.githubAct.user,
-						password : localStorage.githubAct.pwd,
-						auth : "basic"
-					});
-				} else {
-
-				}
-				var repo = github.getRepo("cmanlh", "cmanlh.github.io");
-				repo.write('master', 'post/md/' + Date.now() + "-" + $("#title").val() + ".md", editor.exportFile(null,
-						"text", false), 'post a new blog', function(err) {
-					repo.write('master', 'post/html/' + Date.now() + "-" + $("#title").val() + ".html", editor
-							.exportFile(null, "html", false), 'post a new blog', function(err, data) {
-						console.log(data);
-					});
-				});
+	window.btoa = function(data) {
+		console.log(data);
+		return base64.encode(wtf8.encode(data));
+	};
+	window.atob = function(data) {
+		console.log(data);
+		return wtf8.decode(base64.decode(data));
+	}
+	function post(user, pwd) {
+		var github = new Github({
+			username : user,
+			password : pwd,
+			auth : "basic"
+		});
+		var repo = github.getRepo("cmanlh", "cmanlh.github.io");
+		repo.write('master', 'post/md/' + Date.now() + "-" + $("#title").val() + ".md", editor.exportFile(null, "text",
+				false), 'post a new blog', function(err) {
+			repo.write('master', 'post/html/' + Date.now() + "-" + $("#title").val() + ".html", editor.exportFile(null,
+					"html", false), 'post a new blog', function(err, data) {
+				console.log(data);
 			});
+		});
+	}
+
+	$("#submit").on("click", function(e) {
+		var user, pwd;
+		if (localStorage.githubAct) {
+			var act = JSON.parse(localStorage.githubAct);
+			post(atob(act.user), atob(act.pwd));
+		} else {
+			$(".login").show();
+			return;
+		}
+
+	});
+
+	$("#login").on("click", function(e) {
+		localStorage.githubAct = JSON.stringify({
+			user : btoa($("#user").val()),
+			pwd : btoa($("#pwd").val())
+		});
+	});
 </script>
 </html>
