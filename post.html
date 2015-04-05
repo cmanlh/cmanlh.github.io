@@ -10,7 +10,7 @@
 <body>
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-xs-6 col-md-9">
+			<div class="col-xs-6 col-md-9" style="padding: 0px">
 				<input class="form-control" type="text" placeholder="标题" id="title">
 			</div>
 			<input class="col-xs-2 col-md-1 btn btn-default" type="button" value="清除" id="reset"> <input
@@ -31,7 +31,9 @@
 	}
 	var opts = {
 		basePath : 'http://7xifrq.com1.z0.glb.clouddn.com/EpicEditor',
-		button : false,
+		button : {
+			bar : false
+		},
 		autogrow : {
 			minHeight : editorHeight,
 			maxHeight : editorHeight
@@ -42,15 +44,22 @@
 <script type="text/javascript" src="http://7xifrq.com1.z0.glb.clouddn.com/underscore-min.js"></script>
 <script type="text/javascript" src="http://7xifrq.com1.z0.glb.clouddn.com/github.js"></script>
 <script type="text/javascript">
-	$("#submit").on("click", function(e) {
-		var github = new Github({
-			username : "cmanlh@163.com",
-			password : "passw0rd@github",
-			auth : "basic"
-		});
-		var repo = github.getRepo("cmanlh", "cmanlh.github.com");
-		repo.write('master', 'post/md/' + Date.now() + "-", 'YOUR_NEW_CONTENTS', 'YOUR_COMMIT_MESSAGE', function(err) {
-		});
-	});
+	$("#submit").on(
+			"click",
+			function(e) {
+				var github = new Github({
+					username : "cmanlh@163.com",
+					password : "passw0rd@github",
+					auth : "basic"
+				});
+				var repo = github.getRepo("cmanlh", "cmanlh.github.io");
+				repo.write('master', 'post/md/' + Date.now() + "-" + $("#title").val() + ".md", editor.exportFile(null,
+						"text", false), 'post a new blog', function(err) {
+					repo.write('master', 'post/html/' + Date.now() + "-" + $("#title").val() + ".html", editor
+							.exportFile(null, "html", false), 'post a new blog', function(err,data) {
+						console.log(data);
+					});
+				});
+			});
 </script>
 </html>
