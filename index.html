@@ -16,7 +16,9 @@
 	$.ajax({
 		url : "https://api.github.com/repos/cmanlh/cmanlh.github.io/contents/post/html",
 		success : function(data) {
-			console.log(data);
+			for ( var i in data) {
+				$("body").append(data[i].name);
+			}
 		}
 	});
 </script>
