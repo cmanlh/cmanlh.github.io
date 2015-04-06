@@ -1,12 +1,17 @@
-html {
-	color: #555;
-	height: 100%;
+html, body, .container-fluid, .row {
 	font-size: 15px;
+	height: 100%;
 }
 
-.navBar {
+.controller {
 	border-right: 1px solid #F3F3F3;
 	height: 100%;
+	position: fixed;
+}
+
+.blackboard {
+	position: absolute;
+	right: 0px;
 }
 
 .list {

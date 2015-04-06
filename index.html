@@ -12,22 +12,31 @@
 <body>
 	<div class="container-fluid">
 		<div class="row">
-			<div class="visible-lg-1 col-lg-1"></div>
-			<div class="col-xs-12 col-sm-4 col-md-3 col-lg-2 hidden-xs">hello world navigation</div>
-			<div class="col-xs-12 col-sm-8 col-md-9 col-lg-8 content">
-				<div class="show list"></div>
-				<div class="hidden article">
-					<div class="header">
-						<h3 class="text-center"></h3>
-						<small class="pull-right"></small>
+			<div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 hidden-xs controller">
+				<div class="row">
+					<div class="visible-lg-4 col-lg-5"></div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-7">
+						hello<br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+						<br> <br> <br>world navigation
 					</div>
-					<div class="content"></div>
-					<span
-						style="position: fixed; border: 1px solid; border-radius: 50%; text-align: center; font-size: 2em; line-height: 2em; height: 2em; width: 2em; right: -0.35em; top: -0.35em;"
-						class="navbar-static-top pull-right"><span>✖<span></span></span></span>
 				</div>
 			</div>
-			<div class="visible-lg-1 col-lg-1"></div>
+			<div class="col-xs-12 col-sm-8 col-md-9 col-lg-9 blackboard">
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-10">
+						<div class="show list"></div>
+						<div class="hidden article">
+							<div class="header">
+								<h3 class="text-center"></h3>
+								<small class="pull-right"></small>
+							</div>
+							<div class="content"></div>
+							<span class="closeBtn">✖</span>
+						</div>
+					</div>
+					<div class="visible-lg-2 col-lg-2"></div>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>
@@ -49,10 +58,15 @@
 			for (var i = cnt - 1; i >= 0; i--) {
 				var realData = parseData(data[i].name);
 				$(".list").append(
-						"<blockquote><h4 style='color: #555;' link='"+data[i].path+"'>" + realData.title
-								+ "</h4><small class='pull-right'>" + realData.time + "</small></blockquote>");
+						"<blockquote><h4 link='"+data[i].path+"'>" + realData.title + "</h4><small class='pull-right'>"
+								+ realData.time + "</small></blockquote>");
 			}
 		}
+	});
+
+	$(".closeBtn").on("click", function(e) {
+		$(".list").toggleClass("show hidden");
+		$(".article").toggleClass("show hidden");
 	});
 
 	$(".list").on("click", function(e) {
@@ -77,7 +91,8 @@
 				success : function(data) {
 					$(".article h3").html(target.innerHTML);
 					$(".article small").html(target.nextSibling.innerHTML);
-					$(".article").append(data);
+					$(".article .content").empty();
+					$(".article .content").append(data);
 					$(".list").toggleClass("show hidden");
 					$(".article").toggleClass("show hidden");
 				}
