@@ -2,6 +2,7 @@
 	padding-top: 20px;
 }
 
-.list h4 :HOVER {
+.list blockquote:HOVER {
 	cursor: pointer;
+	background-color: #F5F5F5;
 }
