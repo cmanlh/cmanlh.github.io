@@ -45,7 +45,32 @@
 	});
 
 	$(".list").on("click", function(e) {
-		console.log(e);
+		var target;
+		switch (e.target.tagName) {
+		case "H4":
+			target = e.target;
+			break;
+		case "SMALL":
+			target = e.target.previousSibling;
+			break;
+		case "BLOCKQUOTE":
+			target = e.target.firstChild;
+			break;
+		default:
+			target = null;
+		}
+
+		if (target) {
+			$.ajax({
+				url : "http://cmanlh.github.io/" + $(target).attr("link"),
+				success : function(data) {
+					$(".article").empty();
+					$(".article").append(data);
+					$(".list").toggleClass("show hidden");
+					$(".article").toggleClass("show hidden");
+				}
+			});
+		}
 	});
 </script>
 </html>
