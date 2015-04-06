@@ -17,7 +17,7 @@
 				<div class="show list"></div>
 				<div class="hidden article">
 					<div class="container header">
-						<h2 class="text-center"></h2>
+						<h3 class="text-center"></h3>
 						<small class="pull-right"></small>
 					</div>
 				</div>
@@ -69,7 +69,7 @@
 			$.ajax({
 				url : "http://cmanlh.github.io/" + $(target).attr("link"),
 				success : function(data) {
-					$(".article h2").html(target.innerHTML);
+					$(".article h3").html(target.innerHTML);
 					$(".article small").html(target.nextSibling.innerHTML);
 					$(".article").append(data);
 					$(".list").toggleClass("show hidden");
