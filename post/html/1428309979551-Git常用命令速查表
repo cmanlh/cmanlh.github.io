@@ -1,0 +1,66 @@
+<hr>
+<p>layout: post
+title: Git常用命令速查表
+category: 技术
+tags: Git
+keywords: 
+</p>
+<h2>description: </h2>
+<p>master: 默认开发分支
+
+</p>
+<p>origin: 默认远程版本库
+
+</p>
+<p>Head: 默认开发分支
+
+</p>
+<p>Head^: Head的父提交
+
+</p>
+<h3>创建版本库</h3>
+<pre><code>$ git clone &lt;url&gt;   #克隆远程版本库
+$ git init          #初始化本地版本库</code></pre>
+<h3>修改和提交</h3>
+<pre><code>$ git status        #查看状态
+$ git diff          #查看变更内容
+$ git add .         #跟踪所有改动过的文件
+$ git add &lt;file&gt;    #跟踪指定的文件
+$ git mv &lt;old&gt;&lt;new&gt; #文件改名
+$ git rm&lt;file&gt;      #删除文件
+$ git rm --cached&lt;file&gt;            #停止跟踪文件但不删除
+$ git commit -m &quot;commit messages&quot;  #提交所有更新过的文件
+$ git commit --amend               #修改最后一次改动</code></pre>
+<h3>查看提交历史</h3>
+<pre><code>$ git log                    #查看提交历史
+$ git log -p &lt;file&gt;          #查看指定文件的提交历史
+$ git blame &lt;file&gt;           #以列表方式查看指定文件的提交历史</code></pre>
+<h3>撤销</h3>
+<pre><code>$ git reset --hard HEAD      #撤销工作目录中所有未提交文件的修改内容
+$ git checkout HEAD &lt;file&gt;   #撤销指定的未提交文件的修改内容
+$ git revert &lt;commit&gt;        #撤销指定的提交
+$ git log --before=&quot;1 days&quot;  #退回到之前1天的版本</code></pre>
+<h3>分支与标签</h3>
+<pre><code>$ git branch                   #显示所有本地分支
+$ git checkout &lt;branch/tag&gt;    #切换到指定分支和标签
+$ git branch &lt;new-branch&gt;      #创建新分支
+$ git branch -d &lt;branch&gt;       #删除本地分支
+$ git tag                      #列出所有本地标签
+$ git tag &lt;tagname&gt;            #基于最新提交创建标签
+$ git tag -d &lt;tagname&gt;         #删除标签</code></pre>
+<h3>合并与衍合</h3>
+<pre><code>$ git merge &lt;branch&gt;        #合并指定分支到当前分支
+$ git rebase &lt;branch&gt;       #衍合指定分支到当前分支</code></pre>
+<h3>远程操作</h3>
+<pre><code>$ git remote -v                   #查看远程版本库信息
+$ git remote show &lt;remote&gt;        #查看指定远程版本库信息
+$ git remote add &lt;remote&gt; &lt;url&gt;   #添加远程版本库
+$ git fetch &lt;remote&gt;              #从远程库获取代码
+$ git pull &lt;remote&gt; &lt;branch&gt;      #下载代码及快速合并
+$ git push &lt;remote&gt; &lt;branch&gt;      #上传代码及快速合并
+$ git push &lt;remote&gt; :&lt;branch/tag-name&gt;  #删除远程分支或标签
+$ git push --tags                       #上传所有标签</code></pre>
+<h3>资料链接</h3>
+<ol>
+<li><a href="https://try.github.io/levels/1/challenges/1">Try Git</a></li>
+</ol>
