@@ -18,7 +18,7 @@
 	function parseData(data) {
 		var splittedData = data.split("-");
 		return {
-			time : new Date(Number.parseInt(splittedData[0])).toLocaleString(),
+			time : new Date(parseInt(splittedData[0], 10)).toLocaleString(),
 			title : splittedData[1]
 		};
 	}
