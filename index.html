@@ -15,7 +15,12 @@
 			<div class="col-xs-12 col-sm-4 col-md-3 hidden-xs">hello world navigation</div>
 			<div class="col-xs-12 col-sm-8 col-md-9 content">
 				<div class="show list"></div>
-				<div class="hidden article"></div>
+				<div class="hidden article">
+					<div class="container header">
+						<h2 class="text-center"></h2>
+						<small class="pull-right"></small>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -64,7 +69,8 @@
 			$.ajax({
 				url : "http://cmanlh.github.io/" + $(target).attr("link"),
 				success : function(data) {
-					$(".article").empty();
+					$(".article h2").html(target.innerHTML);
+					$(".article small").html(target.nextSibling.innerHTML);
 					$(".article").append(data);
 					$(".list").toggleClass("show hidden");
 					$(".article").toggleClass("show hidden");
