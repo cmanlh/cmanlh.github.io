@@ -6,3 +6,9 @@
 	cursor: pointer;
 	background-color: #F5F5F5;
 }
+
+.header {
+	padding-right: 15px;
+	padding-top: 15px;
+	padding-bottom: 35px;
+}
