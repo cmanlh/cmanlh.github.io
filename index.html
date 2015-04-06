@@ -7,12 +7,16 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <link href="http://7xifrq.com1.z0.glb.clouddn.com/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/main.css" rel="stylesheet">
 </head>
 <body>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-12 col-sm-4 col-md-3 hidden-xs">hello world navigation</div>
-			<div class="col-xs-12 col-sm-8 col-md-9">Content</div>
+			<div class="col-xs-12 col-sm-8 col-md-9 content">
+				<div class="show list"></div>
+				<div class="hidden article"></div>
+			</div>
 		</div>
 	</div>
 </body>
@@ -33,11 +37,15 @@
 			var cnt = data.length;
 			for (var i = cnt - 1; i >= 0; i--) {
 				var realData = parseData(data[i].name);
-				$(".container-fluid").append(
-						"<blockquote><h4 style='color: #555;'>" + realData.title + "<small class='pull-right'>"
-								+ realData.time + "</small></h4></blockquote>");
+				$(".list").append(
+						"<blockquote><h4 style='color: #555;' link='"+data[i].path+"'>" + realData.title
+								+ "</h4><small class='pull-right'>" + realData.time + "</small></blockquote>");
 			}
 		}
+	});
+
+	$(".list").on("click", function(e) {
+		console.log(e);
 	});
 </script>
 </html>
