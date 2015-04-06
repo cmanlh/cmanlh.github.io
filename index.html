@@ -9,7 +9,9 @@
 <link href="http://7xifrq.com1.z0.glb.clouddn.com/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-	<div class="container"></div>
+	<div class="container-fluid">
+		<div class="row"></div>
+	</div>
 </body>
 <script type="text/javascript" src="http://7xifrq.com1.z0.glb.clouddn.com/jquery.min.js"></script>
 <script type="text/javascript" src="http://7xifrq.com1.z0.glb.clouddn.com/bootstrap/js/bootstrap.min.js"></script>
@@ -28,7 +30,7 @@
 			var cnt = data.length;
 			for (var i = cnt - 1; i >= 0; i--) {
 				var realData = parseData(data[i].name);
-				$(".container").append(
+				$(".container-fluid").append(
 						"<blockquote><h4 style='color: #555;'>" + realData.title + "<small class='pull-right'>"
 								+ realData.time + "</small></h4></blockquote>");
 			}
