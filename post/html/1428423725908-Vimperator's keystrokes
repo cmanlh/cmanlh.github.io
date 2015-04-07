@@ -1,0 +1,18 @@
+<h3>Scrolling</h3>
+<ul>
+<li>j/k : scroll window down/up by one line, respectively</li>
+<li>h/l : scroll window left/right</li>
+<li><Space>/<C-b> : scroll down/up by one page</li>
+<li><C-d>/<C-u> : scroll down/up by 1/2 page</li>
+</ul>
+<h3>History</h3>
+<ul>
+<li><C-o>/<C-i> : move Back/Forward in the current window/tab&#39;s history, respectively</li>
+</ul>
+<h3>Tabs</h3>
+<ul>
+<li>gt/<C-n> : go to the next tab</li>
+<li>gT/<C-p> : go to the previous tab</li>
+<li>g0/g$ : go to the first/last tab</li>
+<li>d : close the active tab (delete the buffer)</li>
+</ul>
