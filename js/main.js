@@ -6,25 +6,77 @@ function parseData(data) {
 	};
 }
 
+var db;
 $(function() {
-	var db;
-
 	new Database({
 		name : "post",
-		callback : function(_db, isConnected) {
-			if (isConnected) {
-				db = _db;
-				console.log(db);
-				var objectStore = db.createObjectStore("list", {
-					keyPath : "postTime"
+		version : 1,
+		callback : function(param) {
+			if (param.isConnected == 1) {
+				db = param.db;
+				db.deleteObjectStore("list");
+				db.createObjectStore("list", {
+					keyPath : "time"
 				});
-				console.log(objectStore);
-				objectStore.count(function(cnt) {
-					console.log("pass count");
-					console.log(cnt);
-				});
-			} else {
+			} else if (param.isConnected == 2) {
+				db = param.db;
+				if (db.objectStoreNames.length == 0) {
+					db.createObjectStore("list", {
+						keyPath : "time"
+					});
+				}
+				var transaction = db.transaction('list', "readwrite");
+				transaction.oncomplete = function(e) {
 
+				}
+				var _objectStore = transaction.objectStore("list");
+				var countReq = _objectStore.count();
+				countReq.onsuccess = function() {
+					if (countReq.result > 0) {
+						var transaction2 = db.transaction('list', "readonly");
+						var _objectStore2 = transaction2.objectStore("list");
+						
+						var request = _objectStore2.openCursor();
+						request.onsuccess = function(event) {
+						  var cursor = event.target.result;
+						  if(cursor) {
+								var data = cursor.value;
+								$(".list").append(
+										"<blockquote><h4 link='" + data.time + "'><a>" + data.title
+												+ "</a></h4><small class='pull-right'>"
+												+ new Date(parseInt(data.time, 10)).toLocaleString()
+												+ "</small></blockquote>");
+						    cursor.continue();
+						  } else {
+						    // no more results
+						  }
+						};
+					} else {
+						$.ajax({
+							url : "https://api.github.com/repos/cmanlh/cmanlh.github.io/contents/post/html",
+							success : function(data) {
+								var transaction2 = db.transaction('list', "readwrite");
+								var _objectStore2 = transaction2.objectStore("list");
+								var cnt = data.length;
+								for (var i = cnt - 1; i >= 0; i--) {
+									var realData = parseData(data[i].name);
+									$(".list").append(
+											"<blockquote><h4 link='" + realData.time + "'><a>" + realData.title
+													+ "</a></h4><small class='pull-right'>"
+													+ new Date(parseInt(realData.time, 10)).toLocaleString()
+													+ "</small></blockquote>");
+									_objectStore2.add({
+										time : realData.time,
+										html : data[i].path,
+										title : realData.title
+									});
+								}
+							}
+						});
+					}
+				}
+			} else {
+				console.log("open database failed!");
 			}
 		}
 	});
@@ -54,9 +106,13 @@ $(function() {
 		}
 
 		if (target) {
-			db.list.get($(target).attr("link"), function(data) {
+			var transaction = db.transaction('list', "readonly");
+			var _objectStore = transaction.objectStore("list");
+			var req = _objectStore.get($(target).attr("link"));
+			req.onsuccess = function() {
+				var data = req.result;
 				$.ajax({
-					url : "http://cmanlh.github.io/" + data,
+					url : "http://cmanlh.github.io/" + data.html,
 					success : function(data) {
 						$(".article h3").html(target.firstChild.innerHTML);
 						$(".article small").html(target.nextSibling.innerHTML);
@@ -66,8 +122,7 @@ $(function() {
 						$(".article").toggleClass("show hidden");
 					}
 				});
-			});
-
+			};
 		}
 	});
 });

@@ -3,21 +3,24 @@ function Database(config) {
 	this.tx = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
 	this.keyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
 
-	var request = _indexedDB.open(config.name);
+	var request = _indexedDB.open(config.name, config.version);
 	request.onupgradeneeded = function(e) {
-		console.log("request.onupgradeneeded");
+		config.callback.call(this, {
+			db : e.target.result,
+			isConnected : 1
+		});
 	}
 
 	request.onsuccess = function(e) {
-		config.callback.apply(request, {
+		config.callback.call(this, {
 			db : e.target.result,
-			isConnected : true
+			isConnected : 2
 		});
 	}
 
 	request.onerror = function(e) {
-		config.callback.apply(request, {
-			isConnected : false
+		config.callback.call(this, {
+			isConnected : 3
 		});
 	}
 }
