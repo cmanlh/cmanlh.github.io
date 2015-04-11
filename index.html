@@ -39,67 +39,6 @@
 </body>
 <script type="text/javascript" src="http://7xifrq.com1.z0.glb.clouddn.com/jquery.min.js"></script>
 <script type="text/javascript" src="http://7xifrq.com1.z0.glb.clouddn.com/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/common/database.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
-<script>
-	function parseData(data) {
-		var splittedData = data.split("-");
-		return {
-			time : splittedData[0],
-			title : splittedData[1]
-		};
-	}
-	$.ajax({
-		url : "https://api.github.com/repos/cmanlh/cmanlh.github.io/contents/post/html",
-		success : function(data) {
-			var cnt = data.length;
-			for (var i = cnt - 1; i >= 0; i--) {
-				var realData = parseData(data[i].name);
-				$(".list").append(
-						"<blockquote><h4 link='"+realData.time+"'><a>" + realData.title
-								+ "</a></h4><small class='pull-right'>"
-								+ new Date(parseInt(realData.time, 10)).toLocaleString() + "</small></blockquote>");
-				localStorage.setItem(realData.time, data[i].path);
-			}
-		}
-	});
-
-	$(".closeBtn").on("click", function(e) {
-		$(".list").toggleClass("show hidden");
-		$(".article").toggleClass("show hidden");
-	});
-
-	$(".list").on("click", function(e) {
-		var target;
-		switch (e.target.tagName) {
-		case "H4":
-			target = e.target;
-			break;
-		case "SMALL":
-			target = e.target.previousSibling;
-			break;
-		case "BLOCKQUOTE":
-			target = e.target.firstChild;
-			break;
-		case "A":
-			target = e.target.parentElement;
-			break;
-		default:
-			target = null;
-		}
-
-		if (target) {
-			$.ajax({
-				url : "http://cmanlh.github.io/" + localStorage.getItem($(target).attr("link")),
-				success : function(data) {
-					$(".article h3").html(target.firstChild.innerHTML);
-					$(".article small").html(target.nextSibling.innerHTML);
-					$(".article .content").empty();
-					$(".article .content").append(data);
-					$(".list").toggleClass("show hidden");
-					$(".article").toggleClass("show hidden");
-				}
-			});
-		}
-	});
-</script>
 </html>
