@@ -14,7 +14,6 @@ $(function() {
 		callback : function(param) {
 			if (param.isConnected == 1) {
 				db = param.db;
-				db.deleteObjectStore("list");
 				db.createObjectStore("list", {
 					keyPath : "time"
 				});
